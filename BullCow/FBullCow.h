@@ -29,11 +29,12 @@ public:
 
 	void reset();
 	void changeLevel(bool);
-	FBullCowCount SubmitGuess(FString);
+	FBullCowCount SubmitValidGuess(FString);
 
 private:
 	int32 myCurrentTry;
 	int32 myMaxTries;
 	int32 level;
 	FString myHiddenWord;
+	bool bGameWon;
 };
