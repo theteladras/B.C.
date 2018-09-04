@@ -37,4 +37,7 @@ private:
 	int32 level;
 	FString myHiddenWord;
 	bool bGameWon;
+
+	bool isIsogram(FString) const;
+	bool isLowerCase(FString) const;
 };
