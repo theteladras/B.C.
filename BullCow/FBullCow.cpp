@@ -1,24 +1,27 @@
 #include "FBullCow.h"
 #include <map>
+#include <vector>
+#include <time.h>
 #define TMap std::map
 
 using int32 = int;
 
 FBullCow::FBullCow() {
 	reset();
-}
+} // constructor
 
-int32 FBullCow::getMaxTries() const { return myMaxTries; }
 int32 FBullCow::getCurrentTry() const { return myCurrentTry; }
 int32 FBullCow::getLevel() const { return level; }
 int32 FBullCow::getHiddenWordLength() const { return myHiddenWord.length(); }
 bool FBullCow::isGameWon() const { return bGameWon; }
+int32 FBullCow::getMaxTries() const { 
+	TMap<int32, int32> WordLengthToMaxTries{ {3, 4}, {4, 5}, {5, 6}, {6, 8}, {7, 10}, {8, 15}, {9, 20}, {10, 30} };
+	return WordLengthToMaxTries[myHiddenWord.length()];
+}
 
 void FBullCow::reset() {
-	constexpr int32 MAX_TRIES = 8;
-	myMaxTries = MAX_TRIES;
-	const FString HIDEN_WORD = "planet";
-	myHiddenWord = HIDEN_WORD;
+	srand(time(0));
+	myHiddenWord = getHiddenWord(rand());
 	myCurrentTry = 1;
 	bGameWon = false;
 	return;
@@ -112,3 +115,15 @@ bool FBullCow::isLowerCase(FString Word) const
 	}
 	return false;
 }
+
+FString FBullCow::getHiddenWord(int32 rnum)
+{
+	std::vector<std::string> HIDEN_WORD = { "planet", "world", "traveling", "main", "mom", "yes", "nope", "capitalism", "america" };
+	int32 HIDEN_WORD_LENGTH = std::size(HIDEN_WORD);
+	int32 newHWindex = rnum % HIDEN_WORD_LENGTH;
+	
+	HWindex = newHWindex;
+	return HIDEN_WORD[HWindex];
+}
+
+

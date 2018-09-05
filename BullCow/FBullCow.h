@@ -33,11 +33,12 @@ public:
 
 private:
 	int32 myCurrentTry;
-	int32 myMaxTries;
 	int32 level;
+	int32 HWindex = 0;
 	FString myHiddenWord;
 	bool bGameWon;
 
 	bool isIsogram(FString) const;
 	bool isLowerCase(FString) const;
+	FString getHiddenWord(int32);
 };
